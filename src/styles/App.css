@@ -1,0 +1,60 @@
+.container {
+  padding: 30px 80px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-style: roboto;
+}
+
+.avatar-chuck {
+  border: 1px solid rgba(46, 125, 50, 0.5);
+  border-radius: 50%;
+  margin: 15px 0px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.joke-container {
+  width: 50%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.MuiTypography-h5 {
+  padding-top: 30px;
+  color: #2e7d32;
+}
+
+.MuiTypography-h3 {
+  color: #2e7d32;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
