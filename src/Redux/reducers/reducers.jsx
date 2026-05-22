@@ -7,36 +7,36 @@ import {
   RANDOM_JOKE_ERROR,
 } from "../actions/constants";
 
-//initial state setup
-const initialState = {
-  randomjoke: [],
-  categories: [],
-  isRandomjoke: false,
+const initialCategoriesState = {
+  items: [],
+  error: null,
 };
 
-//reducers setup
-const reducer = (state = initialState, action) => {
+export const categoriesReducer = (state = initialCategoriesState, action) => {
   switch (action.type) {
     case GET_CATEGORIES:
-      return action.payload;
-
+      return { items: action.payload.categories, error: null };
     case CATEGORIES_ERROR:
-      return state;
-
-    case GET_CATEGORY_JOKE:
-      return action.payload;
-
-    case GET_CATEGORY_JOKE_ERROR:
-      return action.payload;
-
-    case GET_RANDOM_JOKE:
-      return action.payload;
-
-    case RANDOM_JOKE_ERROR:
-      return state;
+      return { ...state, error: action.error };
     default:
       return state;
   }
 };
 
-export default reducer;
+const initialJokeState = {
+  text: "",
+  error: null,
+};
+
+export const randomJokeReducer = (state = initialJokeState, action) => {
+  switch (action.type) {
+    case GET_RANDOM_JOKE:
+    case GET_CATEGORY_JOKE:
+      return { text: action.payload.randomjoke, error: null };
+    case RANDOM_JOKE_ERROR:
+    case GET_CATEGORY_JOKE_ERROR:
+      return { ...state, error: action.error };
+    default:
+      return state;
+  }
+};

@@ -1,15 +1,14 @@
-import React, { Component, useEffect } from "react";
-// import { connect } from "react-redux";
-import CategoryButtons from "./components/CategoryList";
-import RandomJoke from "./components/RandomJoke";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
-import Logo from "./img/Chuck.jpg";
-// import "./App.css";
-import "./styles/App.css";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+
+import CategoryList from "./components/CategoryList";
+import RandomJoke from "./components/RandomJoke";
+import Logo from "./img/Chuck.jpg";
 import { getRandomJoke } from "./Redux/actions/actions";
+import "./styles/App.css";
 
 const theme = createTheme({
   typography: {
@@ -18,13 +17,12 @@ const theme = createTheme({
 });
 
 function App() {
-  const joke = useSelector((state) => state.randomjoke.randomjoke);
-  console.log(joke);
   const dispatch = useDispatch();
+  const joke = useSelector((state) => state.randomjoke.text);
 
   useEffect(() => {
     dispatch(getRandomJoke());
-  }, []);
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -45,9 +43,11 @@ function App() {
           <RandomJoke />
           <Typography variant="h5">Category:</Typography>
 
-          <CategoryButtons />
+          <CategoryList />
 
-          <div className="joke-container">{joke}</div>
+          <div className="joke-container" aria-live="polite">
+            {joke}
+          </div>
 
           <hr />
         </div>

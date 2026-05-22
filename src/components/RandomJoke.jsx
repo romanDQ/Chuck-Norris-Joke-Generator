@@ -1,22 +1,16 @@
-// import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getRandomJoke } from "../Redux/actions/actions";
+import { useDispatch } from "react-redux";
 import Button from "@mui/material/Button";
+import { getRandomJoke } from "../Redux/actions/actions";
 
-function RandomJoke({ getRandomJoke }) {
-  // generateJoke() {
-  //   this.props.getRandomJoke();
-  // }
-  const generateJoke = () => {
-    getRandomJoke();
-  };
+function RandomJoke() {
+  const dispatch = useDispatch();
 
   return (
     <div>
       <Button
         variant="contained"
         color="success"
-        onClick={() => generateJoke()}
+        onClick={() => dispatch(getRandomJoke())}
       >
         GENERATE RANDOM JOKE
       </Button>
@@ -24,18 +18,4 @@ function RandomJoke({ getRandomJoke }) {
   );
 }
 
-//update in Redux and merge into props
-const mapStateToProps = (state) => {
-  return {
-    randomjoke: state.randomjoke,
-  };
-};
-
-//dispatch an action getRandomJoke
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getRandomJoke: () => dispatch(getRandomJoke()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RandomJoke);
+export default RandomJoke;

@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import reducers from "./reducers";
+import { categoriesReducer, randomJokeReducer } from "./reducers";
 
 const rootReducer = combineReducers({
-  categories: reducers,
-  randomjoke: reducers,
+  categories: categoriesReducer,
+  randomjoke: randomJokeReducer,
 });
 
 export default rootReducer;
