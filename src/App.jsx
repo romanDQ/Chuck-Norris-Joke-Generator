@@ -14,7 +14,7 @@ import "./styles/App.css";
 
 const theme = createTheme({
   typography: {
-    fontFamily: ["Roboto Condensed", "cursive"].join(","),
+    fontFamily: ['"Roboto Condensed"', "Roboto", "sans-serif"].join(","),
   },
 });
 
@@ -69,8 +69,6 @@ function App() {
               joke
             )}
           </div>
-
-          <hr />
         </div>
       </div>
     </ThemeProvider>
