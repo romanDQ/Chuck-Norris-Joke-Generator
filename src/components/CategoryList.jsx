@@ -7,6 +7,7 @@ import "../styles/CategoryGrid.css";
 function CategoryList() {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.items);
+  const isJokeLoading = useSelector((state) => state.randomjoke.isLoading);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -20,6 +21,7 @@ function CategoryList() {
           variant="outlined"
           color="success"
           sx={{ margin: 1.25 }}
+          disabled={isJokeLoading}
           onClick={() => dispatch(getCategoryJoke(category))}
         >
           {category}
