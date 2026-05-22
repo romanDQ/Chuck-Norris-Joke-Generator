@@ -1,13 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#2e7d32" />
+  <rect width="64" height="64" rx="6" fill="#f0e6d2" />
+  <rect x="3" y="3" width="58" height="58" rx="4" fill="none" stroke="#1f1a13" stroke-width="2" />
+  <rect x="6" y="6" width="52" height="52" rx="2" fill="none" stroke="#8b3a1f" stroke-width="1.5" />
   <text
     x="50%"
-    y="55%"
+    y="44%"
     text-anchor="middle"
     dominant-baseline="middle"
-    fill="#ffffff"
-    font-family="'Roboto Condensed', Arial, sans-serif"
+    fill="#8b3a1f"
+    font-family="Georgia, 'Times New Roman', serif"
     font-size="28"
-    font-weight="700"
+    font-weight="900"
   >CN</text>
+  <text
+    x="50%"
+    y="72%"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    fill="#1f1a13"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="9"
+    letter-spacing="2"
+  >★ EST ★</text>
 </svg>

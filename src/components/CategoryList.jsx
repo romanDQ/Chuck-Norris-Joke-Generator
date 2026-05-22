@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Button from "@mui/material/Button";
 import { getCategories, getCategoryJoke } from "../Redux/actions/actions";
 import "../styles/CategoryGrid.css";
 
@@ -16,16 +15,15 @@ function CategoryList() {
   return (
     <div className="category-grid">
       {categories.map((category) => (
-        <Button
+        <button
+          type="button"
           key={category}
-          variant="outlined"
-          color="success"
-          sx={{ margin: 1.25 }}
+          className="cat"
           disabled={isJokeLoading}
           onClick={() => dispatch(getCategoryJoke(category))}
         >
           {category}
-        </Button>
+        </button>
       ))}
     </div>
   );
