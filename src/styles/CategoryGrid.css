@@ -1,5 +1,58 @@
 .category-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 1px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+}
+
+.cat {
+  background: var(--paper);
+  color: var(--ink);
+  border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  padding: 22px 12px;
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  position: relative;
+}
+.cat::before {
+  content: "★";
+  display: block;
+  font-style: normal;
+  font-size: 9px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+  opacity: 0.7;
+  transition: opacity 0.18s, color 0.18s;
+}
+.cat:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+.cat:hover:not(:disabled)::before {
+  color: var(--gold);
+  opacity: 1;
+}
+.cat:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -4px;
+}
+.cat:disabled {
+  background: var(--paper);
+  color: rgba(31, 26, 19, 0.4);
+  cursor: not-allowed;
+}
+.cat:disabled::before {
+  color: rgba(139, 58, 31, 0.35);
+}
+
+@media (max-width: 720px) {
+  .category-grid { grid-template-columns: repeat(2, 1fr); }
 }

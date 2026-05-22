@@ -1,0 +1,17 @@
+{
+  "short_name": "Norris Gazette",
+  "name": "The Norris Gazette — Chuck Norris Joke Generator",
+  "description": "A vintage gazette-styled web app that pulls random Chuck Norris jokes from the chucknorris.io API.",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#8b3a1f",
+  "background_color": "#f0e6d2"
+}

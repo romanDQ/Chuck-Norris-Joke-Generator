@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Chuck Norris Joke Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A small React + Redux app that fetches Chuck Norris jokes from the public
+[chucknorris.io](https://api.chucknorris.io) API. Click **Generate Random Joke**
+for a random one, or pick a category to get a joke from that category.
 
-## Available Scripts
+![status](https://img.shields.io/badge/status-demo-2e7d32)
+![react](https://img.shields.io/badge/react-18-61dafb)
+![redux](https://img.shields.io/badge/redux-classic%20%2B%20thunk-764abc)
 
-In the project directory, you can run:
+## Tech stack
 
-### `npm start`
+- **React 18** (functional components + hooks)
+- **Redux** + **redux-thunk** for state and async actions
+- **Material UI v5** for the component library and theming
+- **axios** for HTTP requests
+- **Create React App** (`react-scripts`) for the build toolchain
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Requires Node 18+ and npm.
 
-### `npm test`
+```bash
+npm install
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Then open [http://localhost:3000](http://localhost:3000).
 
-### `npm run build`
+## Available scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Script | Description |
+| --- | --- |
+| `npm start` | Run the app in development mode with hot reload. |
+| `npm run build` | Build an optimised production bundle into `build/`. |
+| `npm run eject` | Eject from Create React App (one-way operation). |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src/
+├── App.jsx                  # Top-level component: layout, theme, joke display
+├── index.js                 # Entry point: creates the store and React root
+├── components/
+│   ├── RandomJoke.jsx       # "Generate Random Joke" button
+│   └── CategoryList.jsx     # Category buttons grid
+├── Redux/
+│   ├── actions/
+│   │   ├── actions.jsx      # Thunks: getRandomJoke, getCategoryJoke, getCategories
+│   │   └── constants.jsx    # Action type constants
+│   └── reducers/
+│       ├── index.jsx        # combineReducers root
+│       └── reducers.jsx     # categoriesReducer + randomJokeReducer
+├── styles/                  # Plain CSS for layout and the category grid
+└── img/Chuck.jpg            # Avatar image
+```
 
-### `npm run eject`
+## State shape
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```ts
+{
+  categories: {
+    items: string[],     // e.g. ["animal", "career", "dev", ...]
+    isLoading: boolean,
+    error: string | null,
+  },
+  randomjoke: {
+    text: string,        // the current joke
+    isLoading: boolean,
+    error: string | null,
+  },
+}
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Each slice has its own reducer (`categoriesReducer`, `randomJokeReducer`).
+A `*_REQUEST` action sets `isLoading` to `true`; the matching success or
+error action resets it.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Data flow
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+[User] -- click --> [Component]
+                       │  dispatch(thunk)
+                       ▼
+                   [Thunk action]
+                       │  dispatch(REQUEST)
+                       │  axios.get(...)
+                       │  dispatch(SUCCESS | ERROR)
+                       ▼
+                   [Reducer] -> new state
+                       │
+                       ▼
+                [useSelector re-render]
+```
 
-## Learn More
+## API
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Endpoint | Used in |
+| --- | --- |
+| `GET https://api.chucknorris.io/jokes/random` | `getRandomJoke` |
+| `GET https://api.chucknorris.io/jokes/random?category={c}` | `getCategoryJoke` |
+| `GET https://api.chucknorris.io/jokes/categories` | `getCategories` |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The base URL is centralised in `src/Redux/actions/actions.jsx` as `API_BASE`.
 
-### Code Splitting
+## Accessibility
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- The joke container is an `aria-live="polite"` region so screen readers
+  announce new jokes when fetched.
+- Loading state uses `aria-busy` on the joke region and an `aria-label` on the
+  spinner.
+- Errors are surfaced through `role="alert"` MUI `<Alert>` components.
 
-### Analyzing the Bundle Size
+## Possible next steps
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Migrate Redux to `@reduxjs/toolkit` (`createSlice` + `createAsyncThunk` or
+  RTK Query) and delete the constants/actions/reducers boilerplate.
+- Replace Create React App with **Vite** for faster builds.
+- Convert the codebase to **TypeScript** for compile-time guarantees on the
+  state shape.
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is for learning purposes. The Chuck Norris jokes themselves come
+from the free public [chucknorris.io](https://chucknorris.io) API.
