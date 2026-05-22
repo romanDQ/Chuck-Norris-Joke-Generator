@@ -304,6 +304,8 @@ body {
   background: var(--ink);
   color: var(--paper);
   border: 1px solid var(--ink);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
   font-family: "Rye", serif;
   font-size: 14px;
   letter-spacing: 4px;
@@ -315,6 +317,10 @@ body {
 .generate:hover:not(:disabled) {
   background: var(--accent);
   border-color: var(--accent);
+}
+.generate:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 .generate:active:not(:disabled) {
   transform: translate(2px, 2px);

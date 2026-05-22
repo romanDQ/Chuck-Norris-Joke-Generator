@@ -24,7 +24,7 @@ function App() {
         <header className="masthead">
           <h1 className="gazette">The Norris Gazette</h1>
           <div className="masthead-meta">
-            <span>Est. 2026</span>
+            <span>Est. 1940</span>
             <span className="star">★</span>
             <span>Vol. I · No. 1</span>
             <span className="star">★</span>
@@ -105,7 +105,7 @@ function App() {
         <CategoryList />
 
         <footer className="page-footer">
-          Printed in the great state of Texas, c. 2026
+          Printed in the great state of Texas, c. 1940
         </footer>
       </div>
     </div>

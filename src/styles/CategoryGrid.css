@@ -10,6 +10,8 @@
   background: var(--paper);
   color: var(--ink);
   border: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
   padding: 22px 12px;
   font-family: "Playfair Display", serif;
   font-size: 18px;
@@ -38,9 +40,17 @@
   color: var(--gold);
   opacity: 1;
 }
+.cat:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -4px;
+}
 .cat:disabled {
-  opacity: 0.55;
+  background: var(--paper);
+  color: rgba(31, 26, 19, 0.4);
   cursor: not-allowed;
+}
+.cat:disabled::before {
+  color: rgba(139, 58, 31, 0.35);
 }
 
 @media (max-width: 720px) {
