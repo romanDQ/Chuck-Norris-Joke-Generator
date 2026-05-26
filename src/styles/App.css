@@ -239,7 +239,7 @@ body {
   margin: 0 0 22px;
   max-width: 920px;
   color: var(--ink);
-  min-height: 1.5em;
+  min-height: clamp(160px, 22vw, 260px);
   position: relative;
 }
 .joke-text .drop {
@@ -268,8 +268,8 @@ body {
 
 .joke-loading {
   display: flex;
-  align-items: center;
-  min-height: 96px;
+  align-items: flex-start;
+  min-height: clamp(160px, 22vw, 260px);
   margin: 0 0 22px;
 }
 .spinner {
@@ -293,6 +293,7 @@ body {
   padding: 14px 18px;
   margin: 0 0 22px;
   max-width: 700px;
+  min-height: clamp(160px, 22vw, 260px);
 }
 
 .generate {
